@@ -14,8 +14,15 @@ session_start();
     </head>
     <body>
     <header class="w-full border-b-4 border-green-300 bg-white shadow-md">
-        <div class="container mx-auto py-4">
-            <h1 class="text-2xl font-bold">La médiathèque</h1>
+        <div class="container mx-auto py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Médiathèque</h1>
+            <div>
+                <?php if (isset($_SESSION['user'])): ?>
+                    <span class="mr-4">Bonjour, <?php echo htmlspecialchars($_SESSION['user']); ?></span>
+                    <a href="logout.php" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Déconnexion</a>
+                <?php else: ?>
+                    <a href="Views/login.php" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Connexion</a>
+                <?php endif; ?>
         </div>
     </header>
     </body>

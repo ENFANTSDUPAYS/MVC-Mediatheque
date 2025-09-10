@@ -2,7 +2,7 @@
 
 function getConnexion(){
     $server = "localhost";
-    $db = "mvc";
+    $db = "mediatheque";
     $username = "root";
     $password = "";
 

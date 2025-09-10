@@ -2,24 +2,16 @@
 
 class Album extends Media{
 
-    private int $id;
     private int $songNumber;
 
     private string $editor;
 
     public function __construct(string $title, string $author, bool $available, int $id, int $songNumber, string $editor)
     {
-        parent::__construct($title, $author, $available);
-        $this->id = $id;
+        parent::__construct( $id, $title, $author, $available);
         $this->songNumber = $songNumber;
         $this->editor = $editor;
     }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
     public function getSongNumber(): int
     {
         return $this->songNumber;

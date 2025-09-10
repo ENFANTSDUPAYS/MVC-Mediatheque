@@ -2,6 +2,7 @@
 
 class Media{
     
+    private int $id;
     private string $title;
 
     private string $author;
@@ -9,10 +10,16 @@ class Media{
     private bool $available;
 
 
-    public function __construct(string $title, string $author, bool $available){
+    public function __construct(int $id, string $title, string $author, bool $available){
+        $this->id = $id;
         $this->title = $title;
         $this->author = $author;
         $this->available = $available;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getTitle() : string
