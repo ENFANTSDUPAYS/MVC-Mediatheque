@@ -2,19 +2,19 @@
 
 class Album extends Media{
 
-    private int $songNumber;
+    private int $idSong;
 
     private string $editor;
 
-    public function __construct(string $title, string $author, bool $available, int $id, int $songNumber, string $editor)
+    public function __construct(string $title, string $author, bool $available, int $id, int $idSong, string $editor)
     {
         parent::__construct( $id, $title, $author, $available);
-        $this->songNumber = $songNumber;
+        $this->idSong = $idSong;
         $this->editor = $editor;
     }
-    public function getSongNumber(): int
+    public function getIdSong(): int
     {
-        return $this->songNumber;
+        return $this->idSong;
     }
 
     public function getEditor(): string
@@ -22,9 +22,9 @@ class Album extends Media{
         return $this->editor;
     }
 
-    public function setSongNumber(int $songNumber): void
+    public function setIdSong(int $idSong): void
     {
-        $this->songNumber = $songNumber;
+        $this->idSong = $idSong;
     }
 
     public function setEditor(string $editor): void
@@ -34,30 +34,30 @@ class Album extends Media{
 
     public function addAlbum(Album $album): void
     {
-        $query = getConnexion()->prepare("INSERT INTO albums (title, author, available, songNumber, editor) VALUES (:title, :author, :available, :songNumber, :editor)");
+        $query = getConnexion()->prepare("INSERT INTO album (title, author, available, id_song, editor) VALUES (:title, :author, :available, :id_song, :editor)");
         $query->bindValue(':title', $album->getTitle());
         $query->bindValue(':author', $album->getAuthor());
         $query->bindValue(':available', $album->getAvailable(), PDO::PARAM_BOOL);
-        $query->bindValue(':songNumber', $album->getSongNumber(), PDO::PARAM_INT);
+        $query->bindValue(':id_song', $album->getIdSong(), PDO::PARAM_INT);
         $query->bindValue(':editor', $album->getEditor());
         $query->execute();
     }
 
     private function editAlbum(Album $album): void
     {
-        $query = getConnexion()->prepare("UPDATE albums SET title = :title, author = :author, available = :available, songNumber = :songNumber, editor = :editor WHERE id = :id");
+        $query = getConnexion()->prepare("UPDATE album SET title = :title, author = :author, available = :available, id_song = :id_song, editor = :editor WHERE id = :id");
         $query->bindValue(':id', $album->getId(), PDO::PARAM_INT);
         $query->bindValue(':title', $album->getTitle());
         $query->bindValue(':author', $album->getAuthor());
         $query->bindValue(':available', $album->getAvailable(), PDO::PARAM_BOOL);
-        $query->bindValue(':songNumber', $album->getSongNumber(), PDO::PARAM_INT);
+        $query->bindValue(':id_song', $album->getIdSong(), PDO::PARAM_INT);
         $query->bindValue(':editor', $album->getEditor());
         $query->execute();
     }
 
     private function deleteAlbum(int $id): void
     {
-        $query = getConnexion()->prepare("DELETE FROM albums WHERE id = :id");
+        $query = getConnexion()->prepare("DELETE FROM album WHERE id = :id");
         $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
     }

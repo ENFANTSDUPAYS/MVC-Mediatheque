@@ -59,6 +59,7 @@ if (isset($_SESSION['user_id'])) {
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Connexion — Médiathèque</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_onjFFfxw6tlc3KSzJ1POV2sR-8W4t5i-qg&s"/>
 </head>
 <body class="min-h-screen bg-gray-50 flex items-center justify-center py-12">
   <div class="w-full max-w-md">

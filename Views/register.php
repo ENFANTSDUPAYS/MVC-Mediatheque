@@ -70,6 +70,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Inscription — Médiathèque</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_onjFFfxw6tlc3KSzJ1POV2sR-8W4t5i-qg&s"/>
 </head>
 <body class="min-h-screen bg-gray-50 flex items-center justify-center py-12">
   <div class="w-full max-w-md">
@@ -93,14 +94,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div>
             <label for="firstname" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
-            <input id="firstname" name="firstname" type="text" required
+            <input id="firstname" name="firstname" type="text" placeholder="Votre prénom..." required
                    value="<?= isset($firstname) ? htmlspecialchars($firstname) : '' ?>"
                    class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300">
           </div>
 
           <div>
             <label for="lastname" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
-            <input id="lastname" name="lastname" type="text" required
+            <input id="lastname" name="lastname" type="text" placeholder="Votre nom..." required
                    value="<?= isset($lastname) ? htmlspecialchars($lastname) : '' ?>"
                    class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300">
           </div>
@@ -122,16 +123,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div>
             <label for="password_confirm" class="block text-sm font-medium text-gray-700 mb-1">Confirmer le mot de passe</label>
-            <input id="password_confirm" name="password_confirm" type="password" required
-                   class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300"
-                   placeholder="Retape ton mot de passe">
+            <input id="password_confirm" name="password_confirm" type="password"  placeholder="Confirmez votre mot de passe" required
+                   class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300">
           </div>
 
           <div>
-            <button type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg shadow-sm transition">
-              S'inscrire
-            </button>
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg shadow-sm transition">S'inscrire</button>
           </div>
 
           <p class="text-sm text-center text-gray-500">
@@ -140,9 +137,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
       </div>
 
-      <div class="bg-gray-50 border-t border-gray-100 p-4 text-center text-xs text-gray-500">
-        Médiathèque — Inscription sécurisée
-      </div>
+      <div class="bg-gray-50 border-t border-gray-100 p-4 text-center text-xs text-gray-500">Médiathèque — Inscription sécurisée</div>
     </div>
   </div>
 </body>
