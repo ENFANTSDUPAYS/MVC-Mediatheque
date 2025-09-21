@@ -6,6 +6,12 @@ $page = $_GET['page'] ?? null;
 
 $publicPages = ['login', 'register'];
 
+if ($page === 'login') {
+    require_once 'Controllers/LoginController.php';
+    $controller = new LoginController();
+    $controller->handleRequest();
+}
+
 //SWITCH POUR LES PAGES
 if (isset($_SESSION['user'])) {
     switch ($page) {
@@ -30,7 +36,7 @@ if (isset($_SESSION['user'])) {
             $title = 'Inscription - Médiathèque';
             break;
         case 'logout':
-            $viewPage = 'Views/logout.php';
+            $viewPage = 'Models/logout.php';
             $title = 'Déconnexion - Médiathèque';
             break;
         case 'login':
@@ -47,6 +53,9 @@ if (isset($_SESSION['user'])) {
         $viewPage = "Views/$page.php";
         $title = ucfirst($page) . " - Médiathèque";
     } else {
+        require_once 'Controllers/LoginController.php';
+        $controller = new LoginController();
+        $controller->handleRequest();
         $viewPage = 'Views/login.php';
         $title = 'Connexion - Médiathèque';
     }
