@@ -50,7 +50,6 @@ class LoginController
             }
         }
 
-        // Si déjà connecté
         if (isset($_SESSION['user_id'])) {
             header('Location: index.php?page=home');
             exit();

@@ -3,11 +3,11 @@
     <div class="p-6">
       <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Se connecter</h1>
 
-      <?php if (!empty($errors)): ?>
+      <?php if (!empty($controller->errors)): ?>
         <div class="mb-4">
           <div class="bg-red-50 border border-red-200 text-red-800 text-sm rounded p-3">
             <ul class="list-disc pl-5">
-              <?php foreach ($errors as $err): ?>
+              <?php foreach ($controller->errors as $err): ?>
                 <li><?= htmlspecialchars($err, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8') ?></li>
               <?php endforeach; ?>
             </ul>
@@ -20,7 +20,7 @@
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
           <input id="email" name="email" type="email" required
-                  value="<?= isset($email) ? htmlspecialchars($email) : '' ?>"
+                  value="<?= htmlspecialchars($controller->email)?>"
                   class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300"
                   placeholder="ton@exemple.com">
         </div>

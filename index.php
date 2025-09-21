@@ -11,6 +11,13 @@ if ($page === 'login') {
     $controller = new LoginController();
     $controller->handleRequest();
 }
+if ($page === 'register') {
+    require_once 'Controllers/RegisterController.php';
+    $controller = new RegisterController();
+    $controller->handleRequest();
+    $viewPage = "Views/register.php";
+    $title = "Inscription - Médiathèque";
+}
 
 //SWITCH POUR LES PAGES
 if (isset($_SESSION['user'])) {
