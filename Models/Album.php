@@ -6,9 +6,9 @@ class Album extends Media{
 
     private string $editor;
 
-    public function __construct(string $title, string $author, bool $available, int $id, int $idSong, string $editor)
+    public function __construct(int $id, string $title, string $author, bool $available, DateTimeImmutable $createdAt, int $idSong, string $editor)
     {
-        parent::__construct( $id, $title, $author, $available);
+        parent::__construct( $id, $title, $author, $available, $createdAt);
         $this->idSong = $idSong;
         $this->editor = $editor;
     }

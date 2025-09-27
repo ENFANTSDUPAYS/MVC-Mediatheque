@@ -4,8 +4,8 @@ class Song extends Media{
     
     private int $id_album;
 
-    public function __construct(string $title, string $author, bool $available, int $id, int $id_album){
-        parent::__construct($id,$title, $author, $available);
+    public function __construct(int $id, string $title, string $author, bool $available, DateTimeImmutable $createdAt, int $id_album){
+        parent::__construct($id,$title, $author, $available, $createdAt);
         $this->id_album = $id_album;
     }
 

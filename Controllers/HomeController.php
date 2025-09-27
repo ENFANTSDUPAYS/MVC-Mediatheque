@@ -10,12 +10,17 @@ class HomeController {
         try {
             $pdo = getConnexion();
 
-            $books  = $pdo->query("SELECT id, title, author, available, 'Livre' AS type FROM book")->fetchAll(PDO::FETCH_ASSOC);
-            $albums = $pdo->query("SELECT id, title, author, available, 'Album' AS type FROM album")->fetchAll(PDO::FETCH_ASSOC);
-            $movies = $pdo->query("SELECT id, title, author, available, 'Film' AS type FROM movie")->fetchAll(PDO::FETCH_ASSOC);
-            $songs  = $pdo->query("SELECT id, title, author, available, 'Chanson' AS type FROM song")->fetchAll(PDO::FETCH_ASSOC);
+            $books  = $pdo->query("SELECT id, title, author, available, created_at, 'Livre' AS type FROM book")->fetchAll(PDO::FETCH_ASSOC);
+            $albums = $pdo->query("SELECT id, title, author, available, created_at, 'Album' AS type FROM album")->fetchAll(PDO::FETCH_ASSOC);
+            $movies = $pdo->query("SELECT id, title, author, available, created_at, 'Film' AS type FROM movie")->fetchAll(PDO::FETCH_ASSOC);
+            $songs  = $pdo->query("SELECT id, title, author, available, created_at, 'Chanson' AS type FROM song")->fetchAll(PDO::FETCH_ASSOC);
+
 
             $medias = array_merge($books, $albums, $movies, $songs);
+
+            usort($medias, function($a, $b){
+                return strtotime($b['created_at']) <=> strtotime($a['created_at']);
+            });
 
             $adapter = new ArrayAdapter($medias);
             $pagerfanta = new Pagerfanta($adapter);

@@ -18,6 +18,7 @@
                         <th class="p-3">Titre</th>
                         <th class="p-3">Auteur</th>
                         <th class="p-3">Disponibilité</th>
+                        <th class="p-3">Créé le</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,7 @@
                                     <?= $media['available'] ? 'Disponible' : 'Indisponible' ?>
                                 </span>
                             </td>
+                            <td class="p-3"><?= htmlspecialchars($media['created_at']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

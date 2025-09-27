@@ -10,11 +10,15 @@ class Media{
     private bool $available;
 
 
-    public function __construct(int $id, string $title, string $author, bool $available){
+    private DateTimeImmutable $createdAt;
+
+
+    public function __construct(int $id, string $title, string $author, bool $available, DateTimeImmutable $createdAt){
         $this->id = $id;
         $this->title = $title;
         $this->author = $author;
         $this->available = $available;
+        $this->createdAt = $createdAt
     }
 
     public function getId(): int
@@ -37,19 +41,29 @@ class Media{
         return $this->available;
     }
 
-    public function setTitle(string $title)
+    public function getCreatedAt(): ?DateTimeImmutable 
+    { 
+        return $this->createdAt;
+    }
+
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    public function setAuthor(string $author){
+    public function setAuthor(string $author): void{
         
         $this->author = $author;
     }
 
-    public function setAvailable(bool $available){
+    public function setAvailable(bool $available): void {
 
         $this->available = $available;
+    }
+
+    public function setCreatedAt(DateTimeImmutable $createdAt): void 
+    {
+        $this->createdAt = $createdAt;
     }
 
     public function rendre($available){

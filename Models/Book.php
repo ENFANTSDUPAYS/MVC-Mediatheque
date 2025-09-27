@@ -4,9 +4,9 @@ class Book extends Media{
 
     private int $pageNumber;
 
-    public function __construct(string $title, string $author, bool $available, int $id, int $pageNumber)
+    public function __construct(int $id, string $title, string $author, bool $available, DateTimeImmutable $createdAt, int $pageNumber)
     {
-        parent::__construct($id,$title, $author, $available);
+        parent::__construct($id,$title, $author, $available, $createdAt);
         $this->pageNumber = $pageNumber;
     }
 

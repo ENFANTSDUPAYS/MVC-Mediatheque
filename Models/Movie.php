@@ -6,9 +6,9 @@ class Movie extends Media{
 
     private Genre $genre;
 
-    public function __construct(string $title, string $author, bool $available, int $id, float $duration, Genre $genre)
+    public function __construct(int $id, string $title, string $author, bool $available, DateTimeImmutable $createdAt, float $duration, Genre $genre)
     {
-        parent::__construct($id,$title, $author, $available);
+        parent::__construct($id,$title, $author, $available, $createdAt);
         $this->duration = $duration;
         $this->genre = $genre;
     }
