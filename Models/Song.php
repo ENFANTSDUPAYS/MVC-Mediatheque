@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Media.php';
+
 class Song extends Media{
     
     private int $id_album;

@@ -4,7 +4,7 @@ include 'Models/connexion.php';
 
 $page = $_GET['page'] ?? 'home';
 
-$publicPages = ['login', 'register'];
+$publicPages = ['login', 'register', 'home', 'listMedia'];
 
 $pages = [
     'home' => ['view' => 'Views/home.php', 'title' => 'Accueil - Médiathèque'],
@@ -39,6 +39,23 @@ switch ($page) {
         $controller = new HomeController();
         $pagerfanta = $controller->handleRequest();
         break;
+    case 'listMedia':
+        require_once 'Controllers/MediaController.php';
+        $controller = new MediaController();
+        $pagerfanta = $controller->listMedia();
+        break;
+    case 'addMedia':
+        require_once 'Controllers/MediaController.php';
+        $controller = new MediaController();
+        $pagerfanta = $controller->addMedia();
+        $success = null;
+        break;
+    case 'editMedia':
+        require_once 'Controllers/MediaController.php';
+        $controller = new MediaController();
+        $pagerfanta = $controller->editMedia();
+        $success = null;
+        break;
 }
 if (isset($pages[$page])) {
     $viewPage = $pages[$page]['view'];
@@ -64,8 +81,8 @@ if (isset($pages[$page])) {
             <div class="flex items-center space-x-4">
                 <img class="h-12" src="assets/ico/ico.png" alt="Logo Médiathèque"/>
                 <a href="index.php?page=home"><h1 class="text-2xl font-bold">Médiathèque</h1></a>
+                <a href="index.php?page=listMedia" class="bg-[#4f39f6] text-white px-4 py-2 rounded hover:bg-[#3c2bd6]">Voir les médias</a>
                 <?php if (isset($_SESSION['user'])): ?>
-                    <a href="index.php?page=listMedia" class="bg-[#4f39f6] text-white px-4 py-2 rounded hover:bg-[#3c2bd6]">Voir les médias</a>
                     <a href="index.php?page=addMedia" class="bg-[#4f39f6] text-white px-4 py-2 rounded hover:bg-[#3c2bd6]">Ajouter un média</a>
                 <?php endif; ?>
             </div>

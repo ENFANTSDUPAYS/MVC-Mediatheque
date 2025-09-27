@@ -1,4 +1,5 @@
 <?php
+require_once 'Media.php';
 
 class Movie extends Media{
 
