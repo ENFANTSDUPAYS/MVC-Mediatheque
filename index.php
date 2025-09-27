@@ -18,6 +18,15 @@ if ($page === 'register') {
     $viewPage = "Views/register.php";
     $title = "Inscription - Médiathèque";
 }
+if ($page === 'home') {
+    require_once 'Controllers/HomeController.php';
+    $controller = new HomeController();
+    $pagerfanta = $controller->handleRequest();
+    $errors = [];
+    $viewPage = "Views/home.php";
+    $title = "Accueil - Médiathèque";
+
+}
 
 //SWITCH POUR LES PAGES
 if (isset($_SESSION['user'])) {
@@ -83,7 +92,7 @@ if (isset($_SESSION['user'])) {
         <div class="container mx-auto py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <img class="h-12" src="assets/ico/ico.png" alt="Logo Médiathèque"/>
-                <a href="index.php"><h1 class="text-2xl font-bold">Médiathèque</h1></a>
+                <a href="index.php?page=home"><h1 class="text-2xl font-bold">Médiathèque</h1></a>
             </div>
             <div class="flex items-center space-x-4 font-semibold">
                 <?php if (isset($_SESSION['user'])): ?>
@@ -94,7 +103,7 @@ if (isset($_SESSION['user'])) {
                 <?php endif; ?>
         </div>
     </header>
-    <div class="flex justify-center items-center w-full mt-8 min-h-[700px]">
+    <div class="flex flex-col justify-center items-center w-full mt-8 min-h-[700px]">
         <?php if (file_exists($viewPage)) {
             include $viewPage;
         } else {

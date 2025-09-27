@@ -2,7 +2,7 @@
 
 ## Objectif
 
-Cet exercice a pour but de vous familiariser avec le concept d'héritage en PHP en créant une application simple de gestion de médiathèque. Vous allez utiliser le Design Pattern MVC pour modéliser et manipuler des objets représentant des médias (Livres, DVD, CD) pouvant être loués.
+Cet exercice a pour but de vous familiariser avec le concept d'héritage en PHP en créant une application simple de gestion de médiathèque. Vous allez utiliser le Design Pattern MVC pour modéliser et manipuler des objets représentant des médias (Livres, DVD, CD, Musiques) pouvant être loués.
 
 ---
 
@@ -60,6 +60,9 @@ Cet exercice a pour but de vous familiariser avec le concept d'héritage en PHP 
 │ ├── /ico
 │ ├── /doc
 │ └── /js
+├── /Controllers
+│ ├── LoginController.php
+│ ├── RegisterController.php
 ├── /Models
 │ ├── Album.php
 │ ├── Book.php
