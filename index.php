@@ -51,16 +51,16 @@ switch ($page) {
         $pagerfanta = $controller->addMedia();
         $success = null;
         break;
-    case 'deleteMedia':
-        require_once 'Controllers/MediaController.php';
-        $controller = new MediaController();
-        $controller->deleteMedia();
-        break;
     case 'editMedia':
         require_once 'Controllers/MediaController.php';
         $controller = new MediaController();
         $pagerfanta = $controller->editMedia();
         $success = null;
+        break;
+    case 'deleteMedia':
+        require_once 'Controllers/MediaController.php';
+        $controller = new MediaController();
+        $controller->deleteMedia();
         break;
 }
 if (isset($pages[$page])) {
@@ -73,6 +73,9 @@ if (isset($pages[$page])) {
 
 //AFFICHAGE MESSAGE SUCCESS
 $success = $_SESSION['success'] ?? null;
+if ($success) {
+       unset($_SESSION['success']);
+}
 ?>
 
 <!DOCTYPE html>

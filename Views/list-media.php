@@ -59,7 +59,14 @@ $queryParams = $_GET;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($pagerfanta as $media): ?>
+                    <?php foreach ($pagerfanta as $media):
+                            switch ($media['type']) {
+                                case 'Livre': $type = 'book'; break;
+                                case 'Album': $type = 'album'; break;
+                                case 'Film': $type = 'movie'; break;
+                                case 'Chanson': $type = 'song'; break;
+                                default: $type = ''; break;
+                            }?>
                         <tr class="border-b hover:bg-gray-100 transition">
                             <td class="p-3 font-semibold text-gray-700"><?= htmlspecialchars($media['type']) ?></td>
                             <td class="p-3"><?= htmlspecialchars($media['title']) ?></td>
@@ -80,7 +87,7 @@ $queryParams = $_GET;
                                     </button>
                                 </td>
                                 <td class="p-3">
-                                    <a href="index.php?page=deleteMedia&id=<?= $media['id'] ?>&type=<?= $media['type'] ?>"
+                                    <a href="index.php?page=deleteMedia&id=<?= $media['id'] ?>&type=<?= $type ?>"
                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce média ?');"
                                     class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors duration-200">
                                     Supprimer

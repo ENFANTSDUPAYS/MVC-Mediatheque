@@ -145,20 +145,18 @@ class MediaController {
                 if ($deleted) {
                     $_SESSION['success'] = "Le média a été supprimé avec succès !";
                 } else {
-                    $_SESSION['error'] = "Le média n'a pas été trouvé ou n'a pas pu être supprimé.";
+                    $_SESSION['errors'] = "Impossible de supprimer le média.";
                 }
             } catch (Exception $e) {
-                $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+                $_SESSION['errors'] = "Erreur lors de la suppression : " . $e->getMessage();
             }
 
-            // Redirection
             header('Location: index.php?page=listMedia');
             exit;
         } else {
-            $_SESSION['error'] = "Paramètres manquants pour la suppression.";
+            $_SESSION['errors'] = "Aucun média sélectionné pour la suppression.";
             header('Location: index.php?page=listMedia');
             exit;
         }
     }
-
 }

@@ -189,22 +189,29 @@ class MediaRepository
         }
     }
 
+    public function deleteMedia(int $id, string $type): bool {
+        try {
+            switch ($type) {
+                case 'book':
+                    $stmt = $this->pdo->prepare("DELETE FROM book WHERE id = :id");
+                    break;
+                case 'song':
+                    $stmt = $this->pdo->prepare("DELETE FROM song WHERE id = :id");
+                    break;
+                case 'album':
+                    $stmt = $this->pdo->prepare("DELETE FROM album WHERE id = :id");
+                    break;
+                case 'movie':
+                    $stmt = $this->pdo->prepare("DELETE FROM movie WHERE id = :id");
+                    break;
+                default:
+                    throw new Exception("Type de média inconnu");
+            }
 
-   public function deleteMedia(int $id, string $type): bool {
-    try {
-        $allowedTypes = ['book', 'movie', 'song', 'album'];
-
-        if (!in_array($type, $allowedTypes)) {
-            throw new Exception("Type de média inconnu : " . htmlspecialchars($type));
+            return $stmt->execute([':id' => $id]);
+        } catch (PDOException $e) {
+            error_log("Erreur base de données : " . $e->getMessage());
+            return false;
         }
-
-        $stmt = $this->pdo->prepare("DELETE FROM $type WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
-
-    } catch (PDOException $e) {
-        error_log("Database error: " . $e->getMessage());
-        return false;
     }
-}
-
 }
