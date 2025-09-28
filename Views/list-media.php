@@ -78,9 +78,7 @@ $queryParams = $_GET;
                             </td>
                             <td class="p-3"><?= htmlspecialchars($media['created_at']) ?></td>
                             <?php 
-                                if(isset($_SESSION['user'])){ ?>
-                                <?php var_dump($media['type'], $type); ?>
-                            
+                                if(isset($_SESSION['user'])){ ?>                            
                                 <td class="p-3">
                                     <a href="index.php?page=editMedia&id=<?= $media['id'] ?>&type=<?= $type ?>"
                                         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors duration-200">

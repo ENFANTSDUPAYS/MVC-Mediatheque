@@ -28,6 +28,7 @@ switch ($page) {
         require_once 'Controllers/LoginController.php';
         $controller = new LoginController();
         $controller->handleRequest();
+        $success = null;
         break;
     case 'register':
         require_once 'Controllers/RegisterController.php';

@@ -15,6 +15,8 @@ class LoginController
 
     public function handleRequest(): void
     {
+        $success = '';
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->email = trim($_POST['email'] ?? '');
             $password = $_POST['password'] ?? '';
@@ -38,6 +40,7 @@ class LoginController
                             'email' => $user['email']
                         ];
 
+                        $_SESSION['success'] = "Bienvenue " . $user['firstname'];
                         header('Location: index.php?page=home');
                         exit();
                     } else {
