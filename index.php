@@ -51,6 +51,11 @@ switch ($page) {
         $pagerfanta = $controller->addMedia();
         $success = null;
         break;
+    case 'deleteMedia':
+        require_once 'Controllers/MediaController.php';
+        $controller = new MediaController();
+        $controller->deleteMedia();
+        break;
     case 'editMedia':
         require_once 'Controllers/MediaController.php';
         $controller = new MediaController();

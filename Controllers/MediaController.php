@@ -133,8 +133,32 @@ class MediaController {
         
     }
 
-    public function deleteMedia(){
+    public function deleteMedia(): void {
+        if (isset($_GET['id'], $_GET['type'])) {
+            $id = (int)$_GET['id'];
+            $type = $_GET['type'];
 
+            $repo = new MediaRepository();
+
+            try {
+                $deleted = $repo->deleteMedia($id, $type);
+                if ($deleted) {
+                    $_SESSION['success'] = "Le média a été supprimé avec succès !";
+                } else {
+                    $_SESSION['error'] = "Le média n'a pas été trouvé ou n'a pas pu être supprimé.";
+                }
+            } catch (Exception $e) {
+                $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+            }
+
+            // Redirection
+            header('Location: index.php?page=listMedia');
+            exit;
+        } else {
+            $_SESSION['error'] = "Paramètres manquants pour la suppression.";
+            header('Location: index.php?page=listMedia');
+            exit;
+        }
     }
 
 }

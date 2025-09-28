@@ -80,12 +80,13 @@ $queryParams = $_GET;
                                     </button>
                                 </td>
                                 <td class="p-3">
-                                    <button 
-                                        onclick="if(confirm('Êtes-vous sûr de vouloir supprimer ce média ?')) { window.location.href='index.php?page=listMedia&id=<?= $media['id'] ?>'; }" 
-                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors duration-200">
-                                        Supprimer
-                                    </button>
+                                    <a href="index.php?page=deleteMedia&id=<?= $media['id'] ?>&type=<?= $media['type'] ?>"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce média ?');"
+                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors duration-200">
+                                    Supprimer
+                                    </a>
                                 </td>
+
                             <?php } ?>
                         </tr>
                     <?php endforeach; ?>
