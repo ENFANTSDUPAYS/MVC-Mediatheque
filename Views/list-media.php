@@ -88,9 +88,9 @@ $queryParams = $_GET;
                                 </td>
                                 <td class="p-3">
                                     <a href="index.php?page=deleteMedia&id=<?= $media['id'] ?>&type=<?= $type ?>"
-                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce média ?');"
-                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors duration-200">
-                                    Supprimer
+                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce média ?');"
+                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors duration-200">
+                                        Supprimer
                                     </a>
                                 </td>
 

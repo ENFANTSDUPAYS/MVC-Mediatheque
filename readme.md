@@ -63,6 +63,8 @@ Cet exercice a pour but de vous familiariser avec le concept d'héritage en PHP 
 ├── /Controllers
 │ ├── LoginController.php
 │ ├── RegisterController.php
+│ ├── MediaController.php
+│ ├── HomeController.php
 ├── /Models
 │ ├── Album.php
 │ ├── Book.php
