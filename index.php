@@ -30,6 +30,9 @@ switch ($page) {
         $controller->handleRequest();
         $success = null;
         break;
+    case 'logout':
+        $success = null;
+        break;
     case 'register':
         require_once 'Controllers/RegisterController.php';
         $controller = new RegisterController();

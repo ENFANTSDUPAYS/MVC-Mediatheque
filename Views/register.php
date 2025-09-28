@@ -18,21 +18,21 @@
       <form method="POST" class="space-y-4" novalidate>
         <div>
           <label for="firstname" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
-          <input id="firstname" name="firstname" type="text" placeholder="Votre prénom..." required
+          <input id="firstname" name="firstname" type="text" placeholder="Votre prénom..." required autocomplete="given-name"
                   value="<?= htmlspecialchars($controller->firstname ?? '') ?>"
                   class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300">
         </div>
 
         <div>
           <label for="lastname" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
-          <input id="lastname" name="lastname" type="text" placeholder="Votre nom..." required
+          <input id="lastname" name="lastname" type="text" placeholder="Votre nom..." required autocomplete="family-name"
                   value="<?= htmlspecialchars($controller->lastname ?? '') ?>"
                   class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300">
         </div>
 
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-          <input id="email" name="email" type="email" required
+          <input id="email" name="email" type="email" required autocomplete="username"
                   value="<?= htmlspecialchars($controller->email ?? '') ?>"
                   class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300"
                   placeholder="ton@exemple.com">

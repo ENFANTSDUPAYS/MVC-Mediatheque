@@ -15,11 +15,11 @@
         </div>
       <?php endif; ?>
 
-      <form method="POST" class="space-y-4" novalidate>
+      <form method="POST" class="space-y-4" novalidate autocomplete="on">
 
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-          <input id="email" name="email" type="email" required
+          <input id="email" name="email" type="email" required autocomplete="username"
                   value="<?= htmlspecialchars($controller->email)?>"
                   class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300"
                   placeholder="ton@exemple.com">
@@ -27,7 +27,7 @@
 
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
-          <input id="password" name="password" type="password" required
+          <input id="password" name="password" type="password" required autocomplete="current-password"
                   class="w-full rounded-lg border border-gray-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300"
                   placeholder="Au moins 8 caractères">
         </div>
