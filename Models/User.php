@@ -14,12 +14,9 @@ class User {
     
     private DateTimeImmutable $updatedAt;
 
-    public function __construct($id, $firstname, $lastname, $email, $password) {
-        $this->id = $id;
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->email = $email;
-        $this->password = $password;
+     public function __construct() {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getId(): int {

@@ -33,6 +33,7 @@ switch ($page) {
         require_once 'Controllers/RegisterController.php';
         $controller = new RegisterController();
         $controller->handleRequest();
+        $success = $controller->success;
         break;
     case 'home':
         require_once 'Controllers/HomeController.php';
@@ -64,6 +65,9 @@ if (isset($pages[$page])) {
     $viewPage = 'Views/error-404.php';
     $title = 'Page non trouvée - Médiathèque';
 }
+
+//AFFICHAGE MESSAGE SUCCESS
+$success = $_SESSION['success'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -102,5 +106,26 @@ if (isset($pages[$page])) {
             include 'Views/error-404.php';
         } ?>
     </div>
+    <?php if (!empty($success)): ?>
+    <div id="success" class="fixed top-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-fade">
+        <?= htmlspecialchars($success) ?>
+    </div>
+    <?php endif; ?>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('success')?.remove();
+        }, 3000);
+    </script>
+
+    <style>
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: fade 0.3s ease-in-out;
+        }
+    </style>
     </body>
 </html>
