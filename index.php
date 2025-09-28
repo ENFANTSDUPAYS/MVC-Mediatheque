@@ -92,6 +92,15 @@ if ($success) {
         <link rel="icon" type="image/png" href="assets/ico/ico.png"/>
     </head>
     <body class="flex items-center justify-center flex-col">
+    <div id="loadingOverlay" class="fixed top-0 left-0 w-full h-full bg-white z-50 flex flex-col items-center justify-center space-y-4">
+        <div class="w-3/4 max-w-lg space-y-4">
+            <div class="h-6 bg-gray-300 rounded animate-pulse"></div>
+            <div class="h-4 w-1/2 bg-gray-300 rounded animate-pulse"></div>
+            <div class="h-24 bg-gray-300 rounded animate-pulse"></div>
+            <div class="h-24 bg-gray-300 rounded animate-pulse"></div>
+            <div class="h-24 bg-gray-300 rounded animate-pulse"></div>
+        </div>
+    </div>
     <header class="w-full border-b-2 border-[#4338ca] bg-white shadow-md">
         <div class="container mx-auto py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
@@ -132,9 +141,37 @@ if ($success) {
         .animate-fade {
             animation: fade 0.3s ease-in-out;
         }
+
+        #loadingOverlay{
+            transition: all ease 0.3s;
+        }
     </style>
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
+    <script>        
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.getElementById('loadingOverlay');
+            function showOverlay() {
+                overlay.classList.remove('hidden');
+            }
+
+            function hideOverlay() {
+                overlay.classList.add('hidden');
+            }
+            showOverlay();
+            setTimeout(hideOverlay, 1000);
+
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', e => {
+                    const href = link.getAttribute('href');
+                    if (!href || href.startsWith('#') || href.startsWith('http')) return;
+
+                    e.preventDefault();
+                    showOverlay();
+                    window.location.href = href;
+                });
+            });
+
+
+            //MESSAGE SUCCESS
             setTimeout(() => {
                 document.getElementById('success')?.remove();
             }, 3000);
