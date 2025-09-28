@@ -87,21 +87,21 @@ class MediaController {
                     $genre = Genre::tryFrom($genreId);
                     $movie = new Movie(0, $title, $author, $available, $createdAt, $duration, $genre);
                     $repo->addMovie($movie);
-                    $success = "Le film a été ajouté avec succès !";
+                    $_SESSION['success'] = "Le film a été ajouté avec succès !";
                     break;
 
                 case 'book':
                     $pagenumber = (int)($_POST['pagenumber'] ?? 0);
                     $book = new Book(0, $title, $author, $available, $createdAt, $pagenumber);
                     $repo->addBook($book);
-                    $success = "Le livre a été ajouté avec succès !";
+                    $_SESSION['success'] = "Le livre a été ajouté avec succès !";
                     break;
 
                 case 'song':
-                    $albumId = $_POST['album_id'];
+                    $albumId = isset($_POST['album_id']) && $_POST['album_id'] !== '' ? (int)$_POST['album_id'] : null;
                     $song = new Song(0, $title, $author, $available, $createdAt, $albumId);
                     $repo->addSong($song);
-                    $success = "La chanson a été ajoutée avec succès !";
+                    $_SESSION['success'] = "La chanson a été ajoutée avec succès !";
                     break;
 
                 case 'album':
@@ -109,16 +109,20 @@ class MediaController {
                     $songIds = $_POST['id_song'] ?? [];
                     $album = new Album(0, $title, $author, $available, $createdAt, $editor, array_map('intval', $songIds));
                     $repo->addAlbum($album);
-                    $success = "L'album a été ajouté avec succès !";
+                    $_SESSION['success'] = "L'album a été ajouté avec succès !";
                     break;
 
                 default:
-                    $error = "Type de média invalide.";
+                    $_SESSION['error'] = "Type de média invalide.";
             }
+            header("Location: index.php?page=listMedia");
+            exit;
 
         } catch (PDOException $e) {
             error_log("Database error: ".$e->getMessage());
-            $error = "Une erreur est survenue lors de l'ajout du média.";
+            $_SESSION['error'] = "Une erreur est survenue lors de l'ajout du média.";
+            header("Location: index.php?page=listMedia");
+            exit;
         }
     }
 

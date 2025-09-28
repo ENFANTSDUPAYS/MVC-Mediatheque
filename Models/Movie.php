@@ -5,7 +5,7 @@ require_once 'Genre.php';
 class Movie extends Media
 {
     private float $duration;
-    private Genre $genre;
+    private Genre $genre; 
 
     public function __construct(
         int $id,
@@ -14,7 +14,7 @@ class Movie extends Media
         bool $available,
         DateTimeImmutable $createdAt,
         float $duration,
-        Genre $genre
+        Genre $genre = null
     ) {
         parent::__construct($id, $title, $author, $available, $createdAt);
         $this->duration = $duration;
@@ -34,10 +34,5 @@ class Movie extends Media
     public function getGenre(): Genre
     {
         return $this->genre;
-    }
-
-    public function setGenre(Genre $genre): void
-    {
-        $this->genre = $genre;
     }
 }

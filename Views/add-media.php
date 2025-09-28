@@ -58,7 +58,7 @@
                 </select>
             </div>
         </div>
-
+        
         <div id="bookFields" class="space-y-4 mt-4">
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Nombre de pages :</label>
@@ -75,13 +75,28 @@
                 <label class="block text-gray-700 font-semibold mb-2">Ajouter des chansons :</label>
                 <select name="id_song[]" multiple class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4f39f6]">
                     <?php
-                    $songs = $pdo->query("SELECT id, title FROM song ORDER BY title")->fetchAll(PDO::FETCH_ASSOC);
+                    $songs = $pdo->query("SELECT id, title FROM song WHERE album_id IS NULL ORDER BY title")->fetchAll(PDO::FETCH_ASSOC);
                     foreach($songs as $song) {
                         echo "<option value=\"{$song['id']}\">".htmlspecialchars($song['title'])."</option>";
                     }
                     ?>
                 </select>
                 <small class="text-gray-500">Ctrl/Cmd + clic pour sélectionner plusieurs chansons</small>
+            </div>
+        </div>
+        
+        <div id="songFields" class="space-y-4 mt-4">
+            <div>
+                <label class="block text-gray-700 font-semibold mb-2">Ajouter à un album :</label>
+                <select name="album_id" class="w-full border border-gray-300 rounded px-3 py-2">
+                    <option value="">Aucun</option>
+                    <?php
+                    $albums = $pdo->query("SELECT id, title FROM album")->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($albums as $album) {
+                        echo "<option value=\"{$album['id']}\">".htmlspecialchars($album['title'])."</option>";
+                    }
+                    ?>
+                </select>
             </div>
         </div>
 

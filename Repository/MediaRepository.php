@@ -27,7 +27,7 @@ class MediaRepository
             ':available' => $movie->getAvailable() ? 1 : 0,
             ':created_at' => $movie->getCreatedAt()->format('Y-m-d H:i:s'),
             ':duration' => $movie->getDuration(),
-            ':genre_id' => $movie->getGenre(),
+            ':genre_id' => $movie->getGenre()->value,
         ]);
     }
 
@@ -110,7 +110,7 @@ class MediaRepository
             ':author' => $movie->getAuthor(),
             ':available' => $movie->getAvailable() ? 1 : 0,
             ':duration' => $movie->getDuration(),
-            ':genre_id' => $movie->getGenre() ? $movie->getGenre()->getId() : null,
+            ':genre_id' => $movie->getGenre()->value,
             ':id' => $movie->getId()
         ]);
     }

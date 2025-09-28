@@ -18,12 +18,12 @@ class Song extends Media
         $this->albumId = $albumId;
     }
 
-    public function getAlbumId(): int
+    public function getAlbumId(): ?int
     {
         return $this->albumId;
     }
 
-    public function setAlbumId(int $albumId): void
+    public function setAlbumId(?int $albumId): void
     {
         $this->albumId = $albumId;
     }

@@ -140,6 +140,7 @@ if ($success) {
             const movieFields = document.getElementById('movieFields');
             const bookFields = document.getElementById('bookFields');
             const albumFields = document.getElementById('albumFields');
+            const songFields = document.getElementById('songFields');
 
             if (!typeSelect) {
                 return;
@@ -149,6 +150,7 @@ if ($success) {
                 movieFields?.classList.add('hidden');
                 bookFields?.classList.add('hidden');
                 albumFields?.classList.add('hidden');
+                songFields?.classList.add('hidden');
 
                 switch(typeSelect.value) {
                     case 'movie':
@@ -159,6 +161,9 @@ if ($success) {
                         break;
                     case 'album':
                         albumFields?.classList.remove('hidden');
+                        break;
+                    case 'song':
+                        songFields?.classList.remove('hidden');
                         break;
                 }
             }
