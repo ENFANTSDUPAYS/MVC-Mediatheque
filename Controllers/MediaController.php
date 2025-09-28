@@ -82,13 +82,9 @@ class MediaController {
         try {
             switch ($type) {
                 case 'movie':
-                    $duration = (float)($_POST['duration'] ?? 0);
-                    $genreId = (int)($_POST['genre_id'] ?? 0);
+                    $duration = (float)($_POST['duration']);
+                    $genreId = (int)($_POST['genre_id']);
                     $genre = Genre::tryFrom($genreId);
-                    if (!$genre) {
-                $error = "Genre invalide.";
-                break;
-            }
                     $movie = new Movie(0, $title, $author, $available, $createdAt, $duration, $genre);
                     $repo->addMovie($movie);
                     $success = "Le film a été ajouté avec succès !";
@@ -102,15 +98,16 @@ class MediaController {
                     break;
 
                 case 'song':
-                    $song = new Song(0, $title, $author, $available, $createdAt, 0);
+                    $albumId = $_POST['album_id'];
+                    $song = new Song(0, $title, $author, $available, $createdAt, $albumId);
                     $repo->addSong($song);
                     $success = "La chanson a été ajoutée avec succès !";
                     break;
 
                 case 'album':
-                    $editor = trim($_POST['editor'] ?? '');
-                    $id_songs = $_POST['id_song'] ?? [];
-                    $album = new Album(0, $title, $author, $available, $createdAt, $id_songs, $editor);
+                    $editor = $_POST['editor'];
+                    $songIds = $_POST['id_song'] ?? [];
+                    $album = new Album(0, $title, $author, $available, $createdAt, $editor, array_map('intval', $songIds));
                     $repo->addAlbum($album);
                     $success = "L'album a été ajouté avec succès !";
                     break;
@@ -129,7 +126,84 @@ class MediaController {
     }
 
 
-    public function editMedia() {
+    public function editMedia(): array {
+        $repo = new MediaRepository();
+        //RECUPERATION EN GET
+        $id = $_POST['id'] ?? null;
+        $type = $_POST['type'] ?? null;
+
+        if (!$id || !$type) {
+            $_SESSION['errors'] = "Média ou type invalide.";
+            header('Location: index.php?page=listMedia');
+            exit;
+        }
+
+        try {
+            switch ($type) {
+                case 'book':
+                    $book = new Book(
+                        (int)$id,
+                        $_POST['title'],
+                        $_POST['author'],
+                        (bool)$_POST['available'],
+                        new DateTimeImmutable(),
+                        (int)$_POST['pagenumber']
+                    );
+                    $repo->editBook($book);
+                    break;
+
+                case 'movie':
+                    $movie = new Movie(
+                        (int)$id,
+                        $_POST['title'],
+                        $_POST['author'],
+                        (bool)$_POST['available'],
+                        new DateTimeImmutable(),
+                        $_POST['duration'],
+                        $_POST['genre_id'],
+                    );
+                    $repo->editMovie($movie);
+                    break;
+
+                case 'song':
+                    $albumId = $_POST['album_id'] ?? null;
+                    $song = new Song(
+                        (int)$id,
+                        $_POST['title'],
+                        $_POST['author'],
+                        (bool)$_POST['available'],
+                        new DateTimeImmutable(),
+                        $albumId ? (int)$albumId : null
+                    );
+                    $repo->editSong($song);
+                    break;
+
+                case 'album':
+                    $songIds = $_POST['id_song'] ?? [];
+                    $album = new Album(
+                        (int)$id,
+                        $_POST['title'],
+                        $_POST['author'],
+                        (bool)$_POST['available'],
+                        new DateTimeImmutable(),
+                        $_POST['editor'],
+                        array_map('intval', $songIds)
+                    );
+                    $repo->editAlbum($album);
+                    break;
+
+                default:
+                    throw new Exception("Type de média inconnu.");
+            }
+
+            $_SESSION['success'] = "Le média a été modifié avec succès !";
+
+        } catch (Exception $e) {
+            $_SESSION['errors'] = "Erreur lors de la modification : " . $e->getMessage();
+        }
+
+        header('Location: index.php?page=listMedia');
+        exit;
         
     }
 

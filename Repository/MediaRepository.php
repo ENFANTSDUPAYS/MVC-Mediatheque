@@ -59,7 +59,7 @@ class MediaRepository
             ':author' => $song->getAuthor(),
             ':available' => $song->getAvailable() ? 1 : 0,
             ':created_at' => $song->getCreatedAt()->format('Y-m-d H:i:s'),
-            ':album_id' => $song->getIdAlbum() ?? null
+            ':album_id' => $song->getAlbumId() ?? null
         ]);
     }
 
@@ -80,11 +80,11 @@ class MediaRepository
         $albumId = (int)$this->pdo->lastInsertId();
 
         //ASSOCIATION DES SONS
-        if (!empty($album->getIdSongs())) {
+        if (!empty($album->getSongIds())) {
             $stmt2 = $this->pdo->prepare(
                 "UPDATE song SET album_id = :album_id WHERE id = :song_id"
             );
-            foreach ($album->getIdSongs() as $songId) {
+            foreach ($album->getSongIds() as $songId) {
                 $stmt2->execute([
                     ':album_id' => $albumId,
                     ':song_id' => $songId
@@ -94,7 +94,7 @@ class MediaRepository
     }
     
     //MODIFIER UN FILM
-    public function updateMovie(Movie $movie): void {
+    public function editMovie(Movie $movie): void {
         $stmt = $this->pdo->prepare(
             "UPDATE movie SET 
                 title = :title, 
@@ -117,7 +117,7 @@ class MediaRepository
 
 
     //MODIFIER UN BOOK
-    public function updateBook(Book $book): void {
+    public function editBook(Book $book): void {
         $stmt = $this->pdo->prepare(
             "UPDATE book SET 
                 title = :title, 
@@ -151,7 +151,7 @@ class MediaRepository
             ':title' => $song->getTitle(),
             ':author' => $song->getAuthor(),
             ':available' => $song->getAvailable() ? 1 : 0,
-            ':album_id' => $song->getIdAlbum() ?? null,
+            ':album_id' => $song->getAlbumId() ?? null,
             ':id' => $song->getId()
         ]);
     }
@@ -175,12 +175,21 @@ class MediaRepository
             ':id' => $album->getId()
         ]);
 
+        $albumId = $album->getId();
+
+        // Détacher toutes les chansons qui n'appartiennent plus à l'album
+        $stmtDetach = $this->pdo->prepare(
+            "UPDATE song SET album_id = NULL WHERE album_id = :album_id"
+        );
+        $stmtDetach->execute([':album_id' => $albumId]);
+
+
         //UPDATE POUR LES CHANSONSS
-        if (!empty($album->getIdSongs())) {
+        if (!empty($album->getSongIds())) {
             $stmt2 = $this->pdo->prepare(
                 "UPDATE song SET album_id = :album_id WHERE id = :song_id"
             );
-            foreach ($album->getIdSongs() as $songId) {
+            foreach ($album->getSongIds() as $songId) {
                 $stmt2->execute([
                     ':album_id' => $album->getId(),
                     ':song_id' => $songId

@@ -3,7 +3,7 @@ require_once 'Media.php';
 
 class Song extends Media
 {
-    private int $id_album;
+    private ?int $albumId;
 
     public function __construct(
         int $id,
@@ -11,19 +11,20 @@ class Song extends Media
         string $author,
         bool $available,
         DateTimeImmutable $createdAt,
-        int $id_album = 0,
+        ?int $albumId
+        
     ) {
         parent::__construct($id, $title, $author, $available, $createdAt);
-        $this->id_album = $id_album;
+        $this->albumId = $albumId;
     }
 
-    public function getIdAlbum(): int
+    public function getAlbumId(): int
     {
-        return $this->id_album;
+        return $this->albumId;
     }
 
-    public function setIdAlbum(int $id_album): void
+    public function setAlbumId(int $albumId): void
     {
-        $this->id_album = $id_album;
+        $this->albumId = $albumId;
     }
 }

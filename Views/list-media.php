@@ -81,7 +81,7 @@ $queryParams = $_GET;
                                 if(isset($_SESSION['user'])){ ?>
                                 <td class="p-3">
                                     <button 
-                                        onclick="window.location.href='index.php?page=editMedia&id=<?= $media['id'] ?>'" 
+                                        onclick="window.location.href='index.php?page=editMedia&id=<?= $media['id'] ?>&type=<?= $type ?>'"
                                         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors duration-200">
                                         Modifier
                                     </button>

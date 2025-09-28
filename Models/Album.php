@@ -3,7 +3,7 @@ require_once 'Media.php';
 
 class Album extends Media
 {
-    private array $idSongs;//POUR LES MUSIQUES
+    private array $songIds;//POUR LES MUSIQUES
     private string $editor;
 
     public function __construct(
@@ -12,22 +12,22 @@ class Album extends Media
         string $author,
         bool $available,
         DateTimeImmutable $createdAt,
-        array $idSongs = [],
         string $editor,
+        array $songIds = []
     ) {
         parent::__construct($id, $title, $author, $available, $createdAt);
         $this->editor = $editor;
-        $this->idSongs = $idSongs;
+        $this->songIds = $songIds;
     }
 
-    public function getIdSongs(): array
+    public function getSongIds(): array
     {
-        return $this->idSongs;
+        return $this->songIds;
     }
 
-    public function setIdSongs(array $idSongs): void
+    public function setSongIds(array $songIds): void
     {
-        $this->idSongs = $idSongs;
+        $this->songIds = $songIds;
     }
 
     public function getEditor(): string
@@ -38,5 +38,15 @@ class Album extends Media
     public function setEditor(string $editor): void
     {
         $this->editor = $editor;
+    }
+
+    public function addSongId(int $songId): void {
+        if (!in_array($songId, $this->songIds)) {
+            $this->songIds[] = $songId;
+        }
+    }
+
+    public function removeSongId(int $songId): void {
+        $this->songIds = array_filter($this->songIds, fn($id) => $id !== $songId);
     }
 }

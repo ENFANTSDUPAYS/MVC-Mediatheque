@@ -39,7 +39,7 @@
             </select>
         </div>
 
-        <div id="movieFields" class="space-y-4 mt-4 hidden">
+        <div id="movieFields" class="space-y-4 mt-4">
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Durée (minutes) :</label>
                 <input type="number" name="duration" min="1" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4f39f6]">
@@ -50,23 +50,23 @@
                     <option value="">Choisir un genre</option>
                     <?php
                     $pdo = getConnexion();
-                    $genres = $pdo->query("SELECT id, title FROM genre ORDER BY title")->fetchAll(PDO::FETCH_ASSOC);
+                    $genres = $pdo->query("SELECT id, name FROM genre")->fetchAll(PDO::FETCH_ASSOC);
                     foreach($genres as $genre) {
-                        echo "<option value=\"{$genre['id']}\">".htmlspecialchars($genre['title'])."</option>";
+                        echo "<option value=\"{$genre['id']}\">".htmlspecialchars($genre['name'])."</option>";
                     }
                     ?>
                 </select>
             </div>
         </div>
 
-        <div id="bookFields" class="space-y-4 mt-4 hidden">
+        <div id="bookFields" class="space-y-4 mt-4">
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Nombre de pages :</label>
                 <input type="number" name="pagenumber" min="1" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4f39f6]">
             </div>
         </div>
 
-        <div id="albumFields" class="space-y-4 mt-4 hidden">
+        <div id="albumFields" class="space-y-4 mt-4">
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Nom de l'éditeur :</label>
                 <input type="text" name="editor" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4f39f6]">
