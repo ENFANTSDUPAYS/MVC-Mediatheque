@@ -84,6 +84,7 @@ class RegisterController
             }
         }
 
+        //SI DEJA CONNECTE
         if (isset($_SESSION['user'])) {
             header('Location: index.php?page=home');
             exit();

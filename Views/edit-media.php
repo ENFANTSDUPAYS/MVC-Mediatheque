@@ -35,7 +35,7 @@ if (!$id || !$type) {
         <div class="bg-red-100 text-red-700 p-3 rounded mb-4"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
-    <form action="index.php?page=editMedia" method="POST">
+    <form action="index.php?page=editMedia" method="GET">
         <div>
             <label for="title" class="block text-gray-700 font-semibold mb-2">Titre :</label>
             <input type="text" name="title" value="<?= htmlspecialchars($media['title']) ?>" id="title" placeholder="Titre du média" required

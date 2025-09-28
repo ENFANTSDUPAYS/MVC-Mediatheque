@@ -133,25 +133,19 @@ class MediaController {
     public function editMedia(): array {
         $repo = new MediaRepository();
         //RECUPERATION EN GET
-        $id = $_POST['id'] ?? null;
-        $type = $_POST['type'] ?? null;
-
-        if (!$id || !$type) {
-            $_SESSION['errors'] = "Média ou type invalide.";
-            header('Location: index.php?page=listMedia');
-            exit;
-        }
+        $id = $_GET['id'] ?? null;
+        $type = $_GET['type'] ?? null;
 
         try {
             switch ($type) {
                 case 'book':
                     $book = new Book(
                         (int)$id,
-                        $_POST['title'],
-                        $_POST['author'],
-                        (bool)$_POST['available'],
+                        $_GET['title'],
+                        $_GET['author'],
+                        (bool)$_GET['available'],
                         new DateTimeImmutable(),
-                        (int)$_POST['pagenumber']
+                        (int)$_GET['pagenumber']
                     );
                     $repo->editBook($book);
                     break;
@@ -159,23 +153,23 @@ class MediaController {
                 case 'movie':
                     $movie = new Movie(
                         (int)$id,
-                        $_POST['title'],
-                        $_POST['author'],
-                        (bool)$_POST['available'],
+                        $_GET['title'],
+                        $_GET['author'],
+                        (bool)$_GET['available'],
                         new DateTimeImmutable(),
-                        $_POST['duration'],
-                        $_POST['genre_id'],
+                        $_GET['duration'],
+                        $_GET['genre_id'],
                     );
                     $repo->editMovie($movie);
                     break;
 
                 case 'song':
-                    $albumId = $_POST['album_id'] ?? null;
+                    $albumId = $_GET['album_id'] ?? null;
                     $song = new Song(
                         (int)$id,
-                        $_POST['title'],
-                        $_POST['author'],
-                        (bool)$_POST['available'],
+                        $_GET['title'],
+                        $_GET['author'],
+                        (bool)$_GET['available'],
                         new DateTimeImmutable(),
                         $albumId ? (int)$albumId : null
                     );
@@ -183,14 +177,14 @@ class MediaController {
                     break;
 
                 case 'album':
-                    $songIds = $_POST['id_song'] ?? [];
+                    $songIds = $_GET['id_song'] ?? [];
                     $album = new Album(
                         (int)$id,
-                        $_POST['title'],
-                        $_POST['author'],
-                        (bool)$_POST['available'],
+                        $_GET['title'],
+                        $_GET['author'],
+                        (bool)$_GET['available'],
                         new DateTimeImmutable(),
-                        $_POST['editor'],
+                        $_GET['editor'],
                         array_map('intval', $songIds)
                     );
                     $repo->editAlbum($album);

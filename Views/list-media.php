@@ -79,12 +79,13 @@ $queryParams = $_GET;
                             <td class="p-3"><?= htmlspecialchars($media['created_at']) ?></td>
                             <?php 
                                 if(isset($_SESSION['user'])){ ?>
+                                <?php var_dump($media['type'], $type); ?>
+                            
                                 <td class="p-3">
-                                    <button 
-                                        onclick="window.location.href='index.php?page=editMedia&id=<?= $media['id'] ?>&type=<?= $type ?>'"
+                                    <a href="index.php?page=editMedia&id=<?= $media['id'] ?>&type=<?= $type ?>"
                                         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors duration-200">
                                         Modifier
-                                    </button>
+                                    </a>
                                 </td>
                                 <td class="p-3">
                                     <a href="index.php?page=deleteMedia&id=<?= $media['id'] ?>&type=<?= $type ?>"
