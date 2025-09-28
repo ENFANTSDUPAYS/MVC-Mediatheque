@@ -1,3 +1,6 @@
+<?php
+$queryParams = $_GET;
+?>
 <h1 class="text-3xl font-bold mb-6 text-center text-indigo-600">Liste des médias de la Médiathèque</h1>
 
 <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-xl p-6">
@@ -11,7 +14,7 @@
 
     <?php if (!empty($pagerfanta)): ?>
         <div class="overflow-x-auto">
-            <div class="max-w-5xl mx-auto mb-6">
+            <div class=" flex justify-center max-w-5xl mx-auto mb-6">
                 <form method="GET" class="flex flex-wrap gap-4 items-end">
                     <input type="hidden" name="page" value="listMedia">
 
@@ -78,7 +81,7 @@
                                 </td>
                                 <td class="p-3">
                                     <button 
-                                        onclick="if(confirm('Êtes-vous sûr de vouloir supprimer ce média ?')) { window.location.href='index.php?page=deleteMedia&id=<?= $media['id'] ?>'; }" 
+                                        onclick="if(confirm('Êtes-vous sûr de vouloir supprimer ce média ?')) { window.location.href='index.php?page=listMedia&id=<?= $media['id'] ?>'; }" 
                                         class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors duration-200">
                                         Supprimer
                                     </button>
@@ -90,10 +93,12 @@
             </table>
             <div class="mt-4 flex justify-center gap-2">
                 <?php for ($i = 1; $i <= $pagerfanta->getNbPages(); $i++): ?>
-                    <a href="?page=listMedia&pageNum=<?= $i ?>
-                            &title=<?= urlencode($_GET['title'] ?? '') ?>
-                            &author=<?= urlencode($_GET['author'] ?? '') ?>
-                            &available=<?= urlencode($_GET['available'] ?? '') ?>"
+                    <?php
+                        $queryParams['page'] = 'listMedia';
+                        $queryParams['pageNum'] = $i;
+                        $url = '?' . http_build_query($queryParams);
+                    ?>
+                    <a href="<?= $url ?>"
                     class="px-3 py-1 border rounded <?= $i == $pagerfanta->getCurrentPage() ? 'bg-indigo-600 text-white' : 'bg-gray-200' ?>">
                         <?= $i ?>
                     </a>
