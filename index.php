@@ -112,12 +112,6 @@ $success = $_SESSION['success'] ?? null;
     </div>
     <?php endif; ?>
 
-    <script>
-        setTimeout(() => {
-            document.getElementById('success')?.remove();
-        }, 3000);
-    </script>
-
     <style>
         @keyframes fade {
             from { opacity: 0; transform: translateY(-10px); }
@@ -127,5 +121,44 @@ $success = $_SESSION['success'] ?? null;
             animation: fade 0.3s ease-in-out;
         }
     </style>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('success')?.remove();
+            }, 3000);
+
+            //SCRIPT POUR ADD MEDIA
+            const typeSelect = document.getElementById('type');
+            const movieFields = document.getElementById('movieFields');
+            const bookFields = document.getElementById('bookFields');
+            const albumFields = document.getElementById('albumFields');
+
+            if (!typeSelect) {
+                return;
+            }
+
+            function updateFields() {
+                movieFields?.classList.add('hidden');
+                bookFields?.classList.add('hidden');
+                albumFields?.classList.add('hidden');
+
+                switch(typeSelect.value) {
+                    case 'movie':
+                        movieFields?.classList.remove('hidden');
+                        break;
+                    case 'book':
+                        bookFields?.classList.remove('hidden');
+                        break;
+                    case 'album':
+                        albumFields?.classList.remove('hidden');
+                        break;
+                }
+            }
+
+            typeSelect.addEventListener('change', updateFields);
+            updateFields();
+        });
+        </script>
+
     </body>
 </html>
